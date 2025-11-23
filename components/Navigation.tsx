@@ -25,6 +25,10 @@ export default function Navigation() {
 		router.refresh()
 	}
 
+	if (pathname === '/') {
+		return null
+	}
+
 	return (
 		<nav className="flex justify-center gap-6 p-6  text-black">
 			Yadid Hadad Architecture Portfolio
