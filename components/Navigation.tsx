@@ -26,59 +26,35 @@ export default function Navigation() {
 	}
 
 	return (
-		<nav className="flex justify-center gap-6 p-6 bg-gray-100 text-black">
+		<nav className="flex justify-center gap-6 p-6  text-black">
 			Yadid Hadad Architecture Portfolio
 			<div>|</div>
 			<Link
 				href="/projects"
 				className={`hover:underline transition-all ${
-					pathname === '/projects' ||
-					pathname.startsWith('/projects/')
-						? 'font-bold text-black'
-						: 'text-gray-600'
+					pathname === '/projects' || pathname.startsWith('/projects/') ? 'font-bold text-black' : 'text-gray-600'
 				}`}
 			>
 				Projects
 			</Link>
 			<Link
 				href="/analytics"
-				className={`hover:underline transition-all ${
-					pathname === '/analytics'
-						? 'font-bold text-black'
-						: 'text-gray-600'
-				}`}
+				className={`hover:underline transition-all ${pathname === '/analytics' ? 'font-bold text-black' : 'text-gray-600'}`}
 			>
 				Analytics
 			</Link>
-			<Link
-				href="/about"
-				className={`hover:underline transition-all ${
-					pathname === '/about'
-						? 'font-bold text-black'
-						: 'text-gray-600'
-				}`}
-			>
+			<Link href="/about" className={`hover:underline transition-all ${pathname === '/about' ? 'font-bold text-black' : 'text-gray-600'}`}>
 				About
 			</Link>
 			{/* Only show Admin link if authenticated */}
 			{isAuthenticated && (
-				<Link
-					href="/admin"
-					className={`hover:underline transition-all ${
-						pathname === '/admin'
-							? 'font-bold text-black'
-							: 'text-gray-600'
-					}`}
-				>
+				<Link href="/admin" className={`hover:underline transition-all ${pathname === '/admin' ? 'font-bold text-black' : 'text-gray-600'}`}>
 					Admin
 				</Link>
 			)}
 			{/* Logout button if authenticated */}
 			{isAuthenticated && (
-				<button
-					onClick={handleLogout}
-					className="text-gray-600 hover:text-black hover:underline transition-all"
-				>
+				<button onClick={handleLogout} className="text-gray-600 hover:text-black hover:underline transition-all">
 					Logout
 				</button>
 			)}
