@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 interface Project {
 	_id: string
 	title: string
-	description: string
 	architect: string
 	developer: string
+	description: string
 	category: string
 	year: number
 	location?: string
@@ -18,11 +18,7 @@ interface Project {
 	views?: number
 }
 
-export default function AdminClient({
-	initialProjects,
-}: {
-	initialProjects: Project[]
-}) {
+export default function AdminClient({ initialProjects }: { initialProjects: Project[] }) {
 	const router = useRouter()
 	const [projects, setProjects] = useState<Project[]>(initialProjects)
 	const [showModal, setShowModal] = useState(false)
@@ -40,28 +36,13 @@ export default function AdminClient({
 		images: [''],
 	})
 
-	const categories = [
-		'Residential',
-		'Commercial',
-		'Preservation',
-		'Mixed-Use',
-		'High-Rise',
-		'Educational',
-		'Office',
-	]
+	const categories = ['Residential', 'Commercial', 'Preservation', 'Mixed-Use', 'High-Rise', 'Educational', 'Office']
 
-	const handleInputChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>
-	) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const { name, value } = e.target
 		setFormData((prev) => ({
 			...prev,
-			[name]:
-				name === 'year' || name === 'squareMeters' || name === 'units'
-					? parseInt(value) || 0
-					: value,
+			[name]: name === 'year' || name === 'squareMeters' || name === 'units' ? parseInt(value) || 0 : value,
 		}))
 	}
 
@@ -86,6 +67,8 @@ export default function AdminClient({
 		setEditingProject(null)
 		setFormData({
 			title: '',
+			architect: '',
+			developer: '',
 			description: '',
 			category: 'Residential',
 			year: new Date().getFullYear(),
@@ -101,6 +84,8 @@ export default function AdminClient({
 		setEditingProject(project)
 		setFormData({
 			title: project.title,
+			architect: '',
+			developer: '',
 			description: project.description,
 			category: project.category,
 			year: project.year,
@@ -121,9 +106,7 @@ export default function AdminClient({
 		}
 
 		try {
-			const url = editingProject
-				? `/api/projects/${editingProject._id}`
-				: '/api/projects'
+			const url = editingProject ? `/api/projects/${editingProject._id}` : '/api/projects'
 
 			const method = editingProject ? 'PUT' : 'POST'
 
@@ -205,10 +188,7 @@ export default function AdminClient({
 		<div>
 			{/* Add New Project Button */}
 			<div className="mb-6">
-				<button
-					onClick={openAddModal}
-					className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors font-semibold"
-				>
+				<button onClick={openAddModal} className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors font-semibold">
 					+ Add New Project
 				</button>
 			</div>
@@ -219,78 +199,34 @@ export default function AdminClient({
 					<table className="min-w-full divide-y divide-gray-200">
 						<thead className="bg-gray-50">
 							<tr>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Project
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Category
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Year
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Area
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Units
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Views
-								</th>
-								<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Actions
-								</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
+								<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
 							</tr>
 						</thead>
 						<tbody className="bg-white divide-y divide-gray-200">
 							{projects.map((project) => (
-								<tr
-									key={project._id}
-									className="hover:bg-gray-50"
-								>
+								<tr key={project._id} className="hover:bg-gray-50">
 									<td className="px-6 py-4">
-										<div className="text-sm font-medium text-gray-900">
-											{project.title}
-										</div>
-										<div className="text-sm text-gray-500">
-											{project.location}
-										</div>
+										<div className="text-sm font-medium text-gray-900">{project.title}</div>
+										<div className="text-sm text-gray-500">{project.location}</div>
 									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.category}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.year}</td>
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{project.category}
+										{project.squareMeters ? `${project.squareMeters.toLocaleString()} m²` : '-'}
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{project.year}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{project.squareMeters
-											? `${project.squareMeters.toLocaleString()} m²`
-											: '-'}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{project.units || '-'}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{project.views || 0}
-									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.units || '-'}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.views || 0}</td>
 									<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-										<button
-											onClick={() =>
-												openEditModal(project)
-											}
-											className="text-blue-600 hover:text-blue-900 mr-4"
-										>
+										<button onClick={() => openEditModal(project)} className="text-blue-600 hover:text-blue-900 mr-4">
 											Edit
 										</button>
-										<button
-											onClick={() =>
-												handleDelete(
-													project._id,
-													project.title
-												)
-											}
-											className="text-red-600 hover:text-red-900"
-										>
+										<button onClick={() => handleDelete(project._id, project.title)} className="text-red-600 hover:text-red-900">
 											Delete
 										</button>
 									</td>
@@ -306,18 +242,12 @@ export default function AdminClient({
 				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
 					<div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
 						<div className="p-6">
-							<h2 className="text-2xl font-bold mb-6">
-								{editingProject
-									? 'Edit Project'
-									: 'Add New Project'}
-							</h2>
+							<h2 className="text-2xl font-bold mb-6">{editingProject ? 'Edit Project' : 'Add New Project'}</h2>
 
 							<form onSubmit={handleSubmit} className="space-y-4">
 								{/* Title */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">
-										Title *
-									</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
 									<input
 										type="text"
 										name="title"
@@ -330,9 +260,7 @@ export default function AdminClient({
 
 								{/* Description */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">
-										Description *
-									</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
 									<textarea
 										name="description"
 										value={formData.description}
@@ -346,9 +274,7 @@ export default function AdminClient({
 								{/* Category & Year */}
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Category *
-										</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
 										<select
 											name="category"
 											value={formData.category}
@@ -364,9 +290,7 @@ export default function AdminClient({
 										</select>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Year *
-										</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Year *</label>
 										<input
 											type="number"
 											name="year"
@@ -380,9 +304,7 @@ export default function AdminClient({
 
 								{/* Location */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">
-										Location
-									</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
 									<input
 										type="text"
 										name="location"
@@ -395,9 +317,7 @@ export default function AdminClient({
 								{/* Square Meters & Units */}
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Area (m²)
-										</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Area (m²)</label>
 										<input
 											type="number"
 											name="squareMeters"
@@ -407,9 +327,7 @@ export default function AdminClient({
 										/>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Units
-										</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Units</label>
 										<input
 											type="number"
 											name="units"
@@ -422,32 +340,20 @@ export default function AdminClient({
 
 								{/* Images */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">
-										Image URLs
-									</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Image URLs</label>
 									{formData.images.map((image, index) => (
-										<div
-											key={index}
-											className="flex gap-2 mb-2"
-										>
+										<div key={index} className="flex gap-2 mb-2">
 											<input
 												type="url"
 												value={image}
-												onChange={(e) =>
-													handleImageChange(
-														index,
-														e.target.value
-													)
-												}
+												onChange={(e) => handleImageChange(index, e.target.value)}
 												placeholder="https://example.com/image.jpg"
 												className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
 											/>
 											{formData.images.length > 1 && (
 												<button
 													type="button"
-													onClick={() =>
-														removeImageField(index)
-													}
+													onClick={() => removeImageField(index)}
 													className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
 												>
 													Remove
@@ -466,13 +372,8 @@ export default function AdminClient({
 
 								{/* Buttons */}
 								<div className="flex gap-4 pt-4">
-									<button
-										type="submit"
-										className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold"
-									>
-										{editingProject
-											? 'Update Project'
-											: 'Create Project'}
+									<button type="submit" className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold">
+										{editingProject ? 'Update Project' : 'Create Project'}
 									</button>
 									<button
 										type="button"
