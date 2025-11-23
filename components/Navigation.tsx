@@ -32,7 +32,7 @@ export default function Navigation() {
 	return (
 		<nav className="flex justify-center gap-6 p-6  text-black">
 			Yadid Hadad Architecture Portfolio
-			<div>|</div>
+			<div className="text-blue-500">|</div>
 			<Link
 				href="/projects"
 				className={`hover:underline transition-all ${
