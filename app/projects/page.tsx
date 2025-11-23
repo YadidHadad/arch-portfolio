@@ -3,7 +3,9 @@ import AboutCard from '@/components/AboutCard'
 
 async function getProjects() {
 	try {
-		const res = await fetch('http://localhost:3000/api/projects', {
+		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+
+		const res = await fetch(`${baseUrl}/api/projects`, {
 			cache: 'no-store',
 		})
 
@@ -64,9 +66,7 @@ export default async function Projects() {
 				</div>
 			) : (
 				<div className="text-center py-12">
-					<p className="text-gray-500 text-lg">
-						No projects found. Add some projects to get started!
-					</p>
+					<p className="text-gray-500 text-lg">No projects found. Add some projects to get started!</p>
 				</div>
 			)}
 		</div>
