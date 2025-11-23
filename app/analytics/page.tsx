@@ -26,7 +26,7 @@ async function getMostViewed() {
 	try {
 		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
-		const res = await fetch(`${baseUrl}/api/projects`, {
+		const res = await fetch(`${baseUrl}/api/projects?most-viewed=5`, {
 			cache: 'no-store',
 		})
 
