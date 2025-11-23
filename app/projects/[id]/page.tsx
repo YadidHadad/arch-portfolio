@@ -4,7 +4,7 @@ import ProjectTimeline from '@/components/ProjectTimeline'
 
 async function getProject(id: string) {
 	try {
-		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:3000/api/projects/${id}`
+		const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}` + `/${id}` || `http://localhost:3000/api/projects/${id}`
 
 		const res = await fetch(`${baseUrl}/api/projects${id}`, {
 			cache: 'no-store',
