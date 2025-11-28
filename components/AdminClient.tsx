@@ -262,7 +262,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 									<input
 										type="text"
 										name="title"
-										value={formData.title}
+										value={formData.architect}
 										onChange={handleInputChange}
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -271,7 +271,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 									<input
 										type="text"
 										name="title"
-										value={formData.title}
+										value={formData.developer}
 										onChange={handleInputChange}
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
