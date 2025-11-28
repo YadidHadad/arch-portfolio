@@ -1,15 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Dyslexic:wght@400;700&display=swap");
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +17,89 @@ body {
   background-color: #fafafa;
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Accessibility Features */
+
+/* High Contrast Mode */
+html.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+html.high-contrast body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+html.high-contrast * {
+  border-color: #ffffff !important;
+}
+
+html.high-contrast a {
+  color: #ffff00;
+  text-decoration: underline;
+}
+
+html.high-contrast button,
+html.high-contrast input {
+  border: 2px solid #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .bg-blue-600 {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html.reduce-motion,
+  html.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Dyslexic-Friendly Font */
+html.dyslexic-font {
+  font-family: "OpenDyslexic", "Comic Sans MS", cursive, sans-serif;
+}
+
+html.dyslexic-font * {
+  font-family: "OpenDyslexic", "Comic Sans MS", cursive, sans-serif !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+  line-height: 1.8 !important;
+}
+
+/* Focus Visible Styles */
+*:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.skip-to-main:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
 }

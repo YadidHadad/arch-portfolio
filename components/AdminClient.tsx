@@ -188,7 +188,11 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 		<div>
 			{/* Add New Project Button */}
 			<div className="mb-6">
-				<button onClick={openAddModal} className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors font-semibold">
+				<button
+					onClick={openAddModal}
+					className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+					aria-label="Add new project to portfolio"
+				>
 					+ Add New Project
 				</button>
 			</div>
@@ -196,39 +200,105 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 			{/* Projects Table */}
 			<div className="bg-white shadow-sm border border-gray-100 rounded">
 				<div className="overflow-x-auto">
-					<table className="min-w-full divide-y divide-gray-200">
+					<table className="min-w-full divide-y divide-gray-200" role="table" aria-label="List of all portfolio projects">
 						<thead className="bg-gray-50">
-							<tr>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Architect</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Developer</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
-								<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+							<tr role="row">
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Project
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Architect
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Developer
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Category
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Area
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Units
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Views
+								</th>
+								<th
+									className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Actions
+								</th>
 							</tr>
 						</thead>
 						<tbody className="bg-white divide-y divide-gray-200">
 							{projects.map((project) => (
-								<tr key={project._id} className="hover:bg-gray-50">
-									<td className="px-6 py-4">
+								<tr key={project._id} className="hover:bg-gray-50 focus-within:bg-gray-50" role="row">
+									<td className="px-6 py-4" role="cell">
 										<div className="text-sm font-medium text-gray-900">{project.title}</div>
 										<div className="text-sm text-gray-500">{project.location}</div>
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.category}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.architect}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.developer}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
+										{project.category}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
+										{project.architect}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
+										{project.developer}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
 										{project.squareMeters ? `${project.squareMeters.toLocaleString()} m²` : '-'}
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.units || '-'}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.views || 0}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-										<button onClick={() => openEditModal(project)} className="text-blue-600 hover:text-blue-900 mr-4">
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
+										{project.units || '-'}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" role="cell">
+										{project.views || 0}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" role="cell">
+										<button
+											onClick={() => openEditModal(project)}
+											className="text-blue-600 hover:text-blue-900 mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
+											aria-label={`Edit ${project.title}`}
+										>
 											Edit
 										</button>
-										<button onClick={() => handleDelete(project._id, project.title)} className="text-red-600 hover:text-red-900">
+										<button
+											onClick={() => handleDelete(project._id, project.title)}
+											className="text-red-600 hover:text-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1"
+											aria-label={`Delete ${project.title}`}
+										>
 											Delete
 										</button>
 									</td>
@@ -241,47 +311,70 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 
 			{/* Modal */}
 			{showModal && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setShowModal(false)}>
+				<div
+					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+					onClick={() => setShowModal(false)}
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="modal-title"
+				>
 					<div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
 						<div className="p-6">
-							<h2 className="text-2xl font-bold mb-6">{editingProject ? 'Edit Project' : 'Add New Project'}</h2>
+							<h2 id="modal-title" className="text-2xl font-bold mb-6">
+								{editingProject ? 'Edit Project' : 'Add New Project'}
+							</h2>
 
 							<form onSubmit={handleSubmit} className="space-y-4">
 								{/* Title */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+									<label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+										Title <span aria-label="required">*</span>
+									</label>
 									<input
+										id="title"
 										type="text"
 										name="title"
 										value={formData.title}
 										onChange={handleInputChange}
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+										aria-required="true"
 									/>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Architect *</label>
+									<label htmlFor="architect" className="block text-sm font-medium text-gray-700 mb-1">
+										Architect <span aria-label="required">*</span>
+									</label>
 									<input
+										id="architect"
 										type="text"
 										name="architect"
 										value={formData.architect}
 										onChange={handleInputChange}
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+										aria-required="true"
 									/>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Developer *</label>
+									<label htmlFor="developer" className="block text-sm font-medium text-gray-700 mb-1">
+										Developer <span aria-label="required">*</span>
+									</label>
 									<input
+										id="developer"
 										type="text"
 										name="developer"
 										value={formData.developer}
 										onChange={handleInputChange}
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+										aria-required="true"
 									/>
 								</div>
 
 								{/* Description */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+									<label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+										Description
+									</label>
 									<textarea
+										id="description"
 										name="description"
 										value={formData.description}
 										onChange={handleInputChange}
@@ -293,14 +386,19 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 								{/* Category & Year */}
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+										<label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+											Category <span aria-label="required">*</span>
+										</label>
 										<select
+											id="category"
 											name="category"
 											value={formData.category}
 											onChange={handleInputChange}
 											required
 											className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+											aria-required="true"
 										>
+											<option value="">Select a category</option>
 											{categories.map((cat) => (
 												<option key={cat} value={cat}>
 													{cat}
@@ -309,22 +407,29 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 										</select>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Year *</label>
+										<label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
+											Year <span aria-label="required">*</span>
+										</label>
 										<input
+											id="year"
 											type="number"
 											name="year"
 											value={formData.year}
 											onChange={handleInputChange}
 											required
 											className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+											aria-required="true"
 										/>
 									</div>
 								</div>
 
 								{/* Location */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+									<label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+										Location
+									</label>
 									<input
+										id="location"
 										type="text"
 										name="location"
 										value={formData.location}
@@ -336,8 +441,11 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 								{/* Square Meters & Units */}
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Area (m²)</label>
+										<label htmlFor="squareMeters" className="block text-sm font-medium text-gray-700 mb-1">
+											Area (m²)
+										</label>
 										<input
+											id="squareMeters"
 											type="number"
 											name="squareMeters"
 											value={formData.squareMeters}
@@ -346,8 +454,11 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 										/>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Units</label>
+										<label htmlFor="units" className="block text-sm font-medium text-gray-700 mb-1">
+											Units
+										</label>
 										<input
+											id="units"
 											type="number"
 											name="units"
 											value={formData.units}
@@ -368,12 +479,14 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 												onChange={(e) => handleImageChange(index, e.target.value)}
 												placeholder="https://example.com/image.jpg"
 												className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+												aria-label={`Image URL ${index + 1}`}
 											/>
 											{formData.images.length > 1 && (
 												<button
 													type="button"
 													onClick={() => removeImageField(index)}
-													className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+													className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+													aria-label={`Remove image ${index + 1}`}
 												>
 													Remove
 												</button>
@@ -383,7 +496,8 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 									<button
 										type="button"
 										onClick={addImageField}
-										className="mt-2 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+										className="mt-2 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+										aria-label="Add another image URL"
 									>
 										+ Add Image
 									</button>
@@ -391,13 +505,16 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 
 								{/* Buttons */}
 								<div className="flex gap-4 pt-4">
-									<button type="submit" className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold">
+									<button
+										type="submit"
+										className="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+									>
 										{editingProject ? 'Update Project' : 'Create Project'}
 									</button>
 									<button
 										type="button"
 										onClick={() => setShowModal(false)}
-										className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 font-semibold"
+										className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
 									>
 										Cancel
 									</button>

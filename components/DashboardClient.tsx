@@ -178,7 +178,11 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<div className=" p-6  border border-gray-100">
 					<h2 className="text-xl font-bold mb-4 text-gray-800">Projects by Category</h2>
-					<div className="h-80 flex items-center justify-center">
+					<div
+						className="h-80 flex items-center justify-center"
+						role="img"
+						aria-label="Pie chart showing distribution of projects by category"
+					>
 						<Pie
 							data={categoryData}
 							options={{
@@ -191,7 +195,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 				<div className=" p-6  border border-gray-100">
 					<h2 className="text-xl font-bold mb-4 text-gray-800">Project Timeline</h2>
-					<div className="h-80">
+					<div className="h-80" role="img" aria-label="Line chart showing project completion timeline over years">
 						<Line data={timelineData} options={chartOptions} />
 					</div>
 				</div>
@@ -200,7 +204,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			{/* Row 2: Area by Project */}
 			<div className=" p-6  border border-gray-100">
 				<h2 className="text-xl font-bold mb-4 text-gray-800">Area by Project</h2>
-				<div className="h-96">
+				<div className="h-96" role="img" aria-label="Bar chart displaying area in square meters for each project">
 					<Bar
 						data={areaData}
 						options={{
@@ -236,7 +240,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<div className=" p-6  border border-gray-100">
 					<h2 className="text-xl font-bold mb-4 text-gray-800">Units by Project</h2>
-					<div className="h-80">
+					<div className="h-80" role="img" aria-label="Horizontal bar chart showing number of units for each project">
 						<Bar
 							data={unitsData}
 							options={{
@@ -268,7 +272,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 				<div className=" p-6  border border-gray-100">
 					<h2 className="text-xl font-bold mb-4 text-gray-800">Total Area by Category</h2>
-					<div className="h-80">
+					<div className="h-80" role="img" aria-label="Bar chart showing total area in square meters by project category">
 						<Bar
 							data={areaByCategoryData}
 							options={{
@@ -305,32 +309,81 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			<div className=" p-6  border border-gray-100">
 				<h2 className="text-xl font-bold mb-4 text-gray-800">All Projects</h2>
 				<div className="overflow-x-auto">
-					<table className="min-w-full divide-y divide-gray-200">
+					<table className="min-w-full divide-y divide-gray-200" role="table" aria-label="Complete list of all projects with details">
 						<thead className="bg-gray-50">
-							<tr>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Project</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Category</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Year</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Location</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Area</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Units</th>
+							<tr role="row">
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Project
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Category
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Year
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Location
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Area
+								</th>
+								<th
+									className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
+									role="columnheader"
+									scope="col"
+								>
+									Units
+								</th>
 							</tr>
 						</thead>
 						<tbody className=" divide-y divide-gray-200">
 							{projects.map((project) => (
-								<tr key={project._id} className="hover:bg-blue-50 transition-colors">
-									<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-600 transition-color">
-										<Link href={`/projects/${project._id}`} key={project._id}>
+								<tr key={project._id} className="hover:bg-blue-50 transition-colors focus-within:bg-blue-50" role="row">
+									<td
+										className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-600 transition-color"
+										role="cell"
+									>
+										<Link
+											href={`/projects/${project._id}`}
+											key={project._id}
+											className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-1"
+										>
 											{project.title}
 										</Link>
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.category}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.year}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.location || '-'}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600" role="cell">
+										{project.category}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600" role="cell">
+										{project.year}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600" role="cell">
+										{project.location || '-'}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600" role="cell">
 										{project.squareMeters ? `${project.squareMeters.toLocaleString()} m²` : '-'}
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600" role="cell">
 										{project.units ? project.units.toLocaleString() : '-'}
 									</td>
 								</tr>
