@@ -5,6 +5,8 @@ import Link from 'next/link'
 interface ProjectCardProps {
 	id: string
 	title: string
+	architect: string
+	developer: string
 	description: string
 	category: string
 	year: number
@@ -12,20 +14,10 @@ interface ProjectCardProps {
 	images: string[]
 }
 
-export default function ProjectCard({
-	id,
-	title,
-	description,
-	category,
-	year,
-	location,
-	images,
-}: ProjectCardProps) {
+export default function ProjectCard({ id, title, architect, developer, description, category, year, location, images }: ProjectCardProps) {
 	// Get first image or use generic architectural placeholder
 	const backgroundImage =
-		images && images.length > 0 && images[0]
-			? images[0]
-			: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200'
+		images && images.length > 0 && images[0] ? images[0] : 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200'
 
 	return (
 		<Link href={`/projects/${id}`}>
@@ -55,24 +47,17 @@ export default function ProjectCard({
 					</div>
 
 					{/* Title */}
-					<h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
-						{title}
-					</h3>
+					<h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
 
 					{/* Description */}
 					<p className="text-sm text-gray-200 mb-3 line-clamp-2">
-						{description}
+						{architect} | {developer}
 					</p>
 
 					{/* Meta Info */}
 					<div className="flex items-center gap-4 text-sm text-gray-300">
 						<span className="flex items-center gap-1">
-							<svg
-								className="w-4 h-4"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
+							<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -84,24 +69,14 @@ export default function ProjectCard({
 						</span>
 						{location && (
 							<span className="flex items-center gap-1">
-								<svg
-									className="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
+								<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										strokeWidth={2}
 										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
 									/>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-									/>
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
 								</svg>
 								{location}
 							</span>

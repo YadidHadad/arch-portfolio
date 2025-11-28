@@ -39,6 +39,8 @@ export default async function Projects() {
 							key={project._id}
 							id={project._id}
 							title={project.title}
+							architect={project.architect}
+							developer={project.developer}
 							description={project.description}
 							category={project.category}
 							year={project.year}
@@ -56,6 +58,8 @@ export default async function Projects() {
 							key={project._id}
 							id={project._id}
 							title={project.title}
+							architect={project.architect}
+							developer={project.developer}
 							description={project.description}
 							category={project.category}
 							year={project.year}
