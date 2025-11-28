@@ -258,16 +258,33 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 										required
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
 									/>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Architect *</label>
+									<input
+										type="text"
+										name="title"
+										value={formData.title}
+										onChange={handleInputChange}
+										required
+										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+									/>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Developer *</label>
+									<input
+										type="text"
+										name="title"
+										value={formData.title}
+										onChange={handleInputChange}
+										required
+										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+									/>
 								</div>
 
 								{/* Description */}
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
 									<textarea
 										name="description"
 										value={formData.description}
 										onChange={handleInputChange}
-										required
 										rows={4}
 										className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
 									/>
