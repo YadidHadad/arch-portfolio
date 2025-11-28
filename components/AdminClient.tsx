@@ -241,7 +241,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 
 			{/* Modal */}
 			{showModal && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setShowModal(false)}>
 					<div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
 						<div className="p-6">
 							<h2 className="text-2xl font-bold mb-6">{editingProject ? 'Edit Project' : 'Add New Project'}</h2>
@@ -261,7 +261,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 									<label className="block text-sm font-medium text-gray-700 mb-1">Architect *</label>
 									<input
 										type="text"
-										name="title"
+										name="architect"
 										value={formData.architect}
 										onChange={handleInputChange}
 										required
@@ -270,7 +270,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 									<label className="block text-sm font-medium text-gray-700 mb-1">Developer *</label>
 									<input
 										type="text"
-										name="title"
+										name="developer"
 										value={formData.developer}
 										onChange={handleInputChange}
 										required
