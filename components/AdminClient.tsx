@@ -84,8 +84,8 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 		setEditingProject(project)
 		setFormData({
 			title: project.title,
-			architect: '',
-			developer: '',
+			architect: project.architect,
+			developer: project.developer,
 			description: project.description,
 			category: project.category,
 			year: project.year,
@@ -242,7 +242,7 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 			{/* Modal */}
 			{showModal && (
 				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setShowModal(false)}>
-					<div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+					<div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
 						<div className="p-6">
 							<h2 className="text-2xl font-bold mb-6">{editingProject ? 'Edit Project' : 'Add New Project'}</h2>
 
