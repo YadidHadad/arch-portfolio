@@ -200,8 +200,9 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 						<thead className="bg-gray-50">
 							<tr>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Architect</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Developer</th>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
@@ -216,7 +217,8 @@ export default function AdminClient({ initialProjects }: { initialProjects: Proj
 										<div className="text-sm text-gray-500">{project.location}</div>
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.category}</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.year}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.architect}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{project.developer}</td>
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 										{project.squareMeters ? `${project.squareMeters.toLocaleString()} m²` : '-'}
 									</td>

@@ -1,35 +1,17 @@
 'use client'
 
-import {
-	Chart as ChartJS,
-	CategoryScale,
-	LinearScale,
-	BarElement,
-	Title,
-	Tooltip,
-	Legend,
-	ArcElement,
-	PointElement,
-	LineElement,
-} from 'chart.js'
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement } from 'chart.js'
 import Link from 'next/link'
 import { Bar, Pie, Line } from 'react-chartjs-2'
 
-ChartJS.register(
-	CategoryScale,
-	LinearScale,
-	BarElement,
-	Title,
-	Tooltip,
-	Legend,
-	ArcElement,
-	PointElement,
-	LineElement
-)
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement)
 
 interface Project {
 	_id: string
 	title: string
+	arrchitect: string
+	developer: string
+	description: string
 	category: string
 	year: number
 	squareMeters?: number
@@ -84,9 +66,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 	// Area by Project
 	const areaData = {
-		labels: projects.map((p) =>
-			p.title.length > 20 ? p.title.substring(0, 20) + '...' : p.title
-		),
+		labels: projects.map((p) => (p.title.length > 20 ? p.title.substring(0, 20) + '...' : p.title)),
 		datasets: [
 			{
 				label: 'Area (m²)',
@@ -100,9 +80,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 	// Units by Project
 	const unitsData = {
-		labels: projects.map((p) =>
-			p.title.length > 20 ? p.title.substring(0, 20) + '...' : p.title
-		),
+		labels: projects.map((p) => (p.title.length > 20 ? p.title.substring(0, 20) + '...' : p.title)),
 		datasets: [
 			{
 				label: 'Number of Units',
@@ -144,8 +122,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 	// Area by Category
 	const categoryAreaData = projects.reduce((acc: any, project) => {
 		if (project.squareMeters) {
-			acc[project.category] =
-				(acc[project.category] || 0) + project.squareMeters
+			acc[project.category] = (acc[project.category] || 0) + project.squareMeters
 		}
 		return acc
 	}, {})
@@ -202,9 +179,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			{/* Row 1: Category Distribution and Timeline */}
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<div className=" p-6  border border-gray-100">
-					<h2 className="text-xl font-bold mb-4 text-gray-800">
-						Projects by Category
-					</h2>
+					<h2 className="text-xl font-bold mb-4 text-gray-800">Projects by Category</h2>
 					<div className="h-80 flex items-center justify-center">
 						<Pie
 							data={categoryData}
@@ -217,9 +192,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 				</div>
 
 				<div className=" p-6  border border-gray-100">
-					<h2 className="text-xl font-bold mb-4 text-gray-800">
-						Project Timeline
-					</h2>
+					<h2 className="text-xl font-bold mb-4 text-gray-800">Project Timeline</h2>
 					<div className="h-80">
 						<Line data={timelineData} options={chartOptions} />
 					</div>
@@ -228,9 +201,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 			{/* Row 2: Area by Project */}
 			<div className=" p-6  border border-gray-100">
-				<h2 className="text-xl font-bold mb-4 text-gray-800">
-					Area by Project
-				</h2>
+				<h2 className="text-xl font-bold mb-4 text-gray-800">Area by Project</h2>
 				<div className="h-96">
 					<Bar
 						data={areaData}
@@ -242,9 +213,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 									ticks: {
 										color: '#64748b',
 										callback: function (value) {
-											return (
-												value.toLocaleString() + ' m²'
-											)
+											return value.toLocaleString() + ' m²'
 										},
 									},
 									grid: {
@@ -268,9 +237,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 			{/* Row 3: Units and Area by Category */}
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<div className=" p-6  border border-gray-100">
-					<h2 className="text-xl font-bold mb-4 text-gray-800">
-						Units by Project
-					</h2>
+					<h2 className="text-xl font-bold mb-4 text-gray-800">Units by Project</h2>
 					<div className="h-80">
 						<Bar
 							data={unitsData}
@@ -302,9 +269,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 				</div>
 
 				<div className=" p-6  border border-gray-100">
-					<h2 className="text-xl font-bold mb-4 text-gray-800">
-						Total Area by Category
-					</h2>
+					<h2 className="text-xl font-bold mb-4 text-gray-800">Total Area by Category</h2>
 					<div className="h-80">
 						<Bar
 							data={areaByCategoryData}
@@ -316,10 +281,7 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 										ticks: {
 											color: '#64748b',
 											callback: function (value) {
-												return (
-													value.toLocaleString() +
-													' m²'
-												)
+												return value.toLocaleString() + ' m²'
 											},
 										},
 										grid: {
@@ -343,65 +305,35 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 
 			{/* Projects Table */}
 			<div className=" p-6  border border-gray-100">
-				<h2 className="text-xl font-bold mb-4 text-gray-800">
-					All Projects
-				</h2>
+				<h2 className="text-xl font-bold mb-4 text-gray-800">All Projects</h2>
 				<div className="overflow-x-auto">
 					<table className="min-w-full divide-y divide-gray-200">
 						<thead className="bg-gray-50">
 							<tr>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Project
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Category
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Year
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Location
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Area
-								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-									Units
-								</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Project</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Category</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Year</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Location</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Area</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Units</th>
 							</tr>
 						</thead>
 						<tbody className=" divide-y divide-gray-200">
 							{projects.map((project) => (
-								<tr
-									key={project._id}
-									className="hover:bg-blue-50 transition-colors"
-								>
+								<tr key={project._id} className="hover:bg-blue-50 transition-colors">
 									<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-600 transition-color">
-										<Link
-											href={`/projects/${project._id}`}
-											key={project._id}
-										>
+										<Link href={`/projects/${project._id}`} key={project._id}>
 											{project.title}
 										</Link>
 									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.category}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.year}</td>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{project.location || '-'}</td>
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-										{project.category}
+										{project.squareMeters ? `${project.squareMeters.toLocaleString()} m²` : '-'}
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-										{project.year}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-										{project.location || '-'}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-										{project.squareMeters
-											? `${project.squareMeters.toLocaleString()} m²`
-											: '-'}
-									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-										{project.units
-											? project.units.toLocaleString()
-											: '-'}
+										{project.units ? project.units.toLocaleString() : '-'}
 									</td>
 								</tr>
 							))}
