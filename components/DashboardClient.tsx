@@ -9,7 +9,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 interface Project {
 	_id: string
 	title: string
-	arrchitect: string
+	architect: string
 	developer: string
 	description: string
 	category: string
@@ -42,8 +42,6 @@ export default function DashboardClient({ projects }: { projects: Project[] }) {
 	// Blue accent colors
 	const blueAccent = 'rgba(59, 130, 246, 0.8)' // blue-500
 	const blueBorder = 'rgba(59, 130, 246, 1)'
-	const blueLight = 'rgba(96, 165, 250, 0.8)' // blue-400
-	const blueLightBorder = 'rgba(96, 165, 250, 1)'
 
 	// Projects by Category
 	const categoryCounts = projects.reduce((acc: any, project) => {

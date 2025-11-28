@@ -14,7 +14,7 @@ interface ProjectCardProps {
 	images: string[]
 }
 
-export default function ProjectCard({ id, title, architect, developer, description, category, year, location, images }: ProjectCardProps) {
+export default function ProjectCard({ id, title, architect, developer, category, year, location, images }: ProjectCardProps) {
 	// Get first image or use generic architectural placeholder
 	const backgroundImage =
 		images && images.length > 0 && images[0] ? images[0] : 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200'
