@@ -14,7 +14,7 @@ export async function PUT(request: Request) {
         //   { id: "673f...", data: { units: 100 } }
         // ]
 
-        const results = [];
+        const results: Array<{ id: string; success: boolean; error?: string }> = [];
 
         for (const update of updates) {
             if (!ObjectId.isValid(update.id)) {
