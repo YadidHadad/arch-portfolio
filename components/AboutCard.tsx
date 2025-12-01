@@ -11,14 +11,14 @@ export default function AboutCard() {
 		>
 			{/* Background Image - Portrait photo */}
 			<div className="absolute inset-0 bg-gray-100">
-				<img
+				{/* <img
 					src={PROFILE_IMAGE}
 					alt="Profile photo"
 					className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
 					onError={(e) => {
 						e.currentTarget.style.display = 'none'
 					}}
-				/>
+				/> */}
 				{/* Gradient Overlay */}
 				<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
 			</div>
